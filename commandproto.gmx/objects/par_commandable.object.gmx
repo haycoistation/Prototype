@@ -28,6 +28,7 @@
             <string>//identification
 platoon = 0;
 squad = 0;
+ind = platoon * 4 + squad;
 
 //type attributes
 speed_cap = 3;
@@ -39,6 +40,68 @@ march_level = 0;
 //variable
 waypoint_x = x;
 waypoint_y = y;
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>121</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_potential_step</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>waypoint_x</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>waypoint_y</string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string>march_level</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>0</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="7" enumb="10">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>march_level = (global.controller).march_levels[ind];
+waypoint_x = (global.controller).waypoints_x[ind];
+waypoint_y = (global.controller).waypoints_y[ind];
+
+
 </string>
           </argument>
         </arguments>

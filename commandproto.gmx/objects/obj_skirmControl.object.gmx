@@ -36,6 +36,7 @@ selection_lavel = 0;  //0.squad,1.platoon,3.all
 taps = 0;
 waypoints_x[16]=0;
 waypoints_y[16]=0;
+march_levels[16] = 0
 
 //tracking
 waypoint_x = 0;
@@ -43,6 +44,12 @@ waypoint_y = 0;
 
 newway = instance_create(x,y,obj_newwaypoint);
 
+for(i = 0; i &lt; 16; i += 1){
+waypoints_x[i]=0;
+waypoints_y[i]=0;
+march_levels[i] = 0;
+}
+global.controller = id;
 </string>
           </argument>
         </arguments>
@@ -90,17 +97,23 @@ newway = instance_create(x,y,obj_newwaypoint);
             <kind>1</kind>
             <string>if (mouse_x &gt; 120){
     if(mouse_x &lt; 680){
+    
+      march_levels[platoon * 4 + squad] = taps;    
+    
       taps += 1;
       alarm[0] = room_speed/4;
+
       if(taps = 1){
         with (newway) {event_user(0);}
-        waypoint_x[platoon * 4 + squad]= mouse_x;
-        waypoint_y[platoon * 4 + squad]= mouse_y;
+        waypoints_x[platoon * 4 + squad]= mouse_x;
+        waypoints_y[platoon * 4 + squad]= mouse_y;
       }
-      if(taps == 4){
-        taps = 0; 
-        alarm[0] = 0; 
-      }   
+      
+      if(taps &gt;= 4){
+        taps = 3; 
+        alarm[0] = room_speed/4; 
+      }
+      with (par_commandable) {event_user(0);}   
     }
 }
 </string>
