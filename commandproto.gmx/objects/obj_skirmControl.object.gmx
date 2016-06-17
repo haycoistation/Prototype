@@ -28,6 +28,7 @@
             <string>//selection
 platoon = 0;
 squad = 0;
+unit = 0
 
 //state
 selection_lavel = 0;  //0.squad,1.platoon,3.all
