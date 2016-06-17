@@ -54,6 +54,56 @@ global.controller = id;
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>301</id>
+        <kind>0</kind>
+        <userelative>-1</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_set_alarm</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>0</kind>
+            <string>1</string>
+          </argument>
+          <argument>
+            <kind>4</kind>
+            <string>11</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="11">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>for (i = 0; i &lt; instance_number(par_commandable); i += 1)
+    {
+        (instance_find(par_commandable,i)).unit = (global.controller).i; 
+    }
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="2" enumb="0">
       <action>
@@ -98,7 +148,8 @@ global.controller = id;
             <string>if (mouse_x &gt; 120){
     if(mouse_x &lt; 680){
     
-      march_levels[platoon * 4 + squad] = taps;    
+      if (march_levels[platoon * 4 + squad] &lt; taps)    
+        march_levels[platoon * 4 + squad] = taps;    
     
       taps += 1;
       alarm[0] = room_speed/4;
