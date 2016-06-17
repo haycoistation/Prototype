@@ -101,6 +101,7 @@ global.controller = id;
     {
         (instance_find(par_commandable,i)).unit = (global.controller).i; 
     }
+//http://gamedevelopment.tutsplus.com/tutorials/the-three-simple-rules-of-flocking-behaviors-alignment-cohesion-and-separation--gamedev-3444
 </string>
           </argument>
         </arguments>
