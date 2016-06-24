@@ -3,7 +3,7 @@
   <spriteName>spr_plinfantry</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-1000</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -68,7 +68,7 @@ yoffset = -10;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>depth = -y
+            <string>//depth = -y
 </string>
           </argument>
         </arguments>
@@ -93,16 +93,46 @@ yoffset = -10;
             <kind>1</kind>
             <string>if(march)
 {
+    direction = point_direction(x,y,waypoint_x,waypoint_y);
+    speed = march_level;
+    if(distance_to_point(waypoint_x,waypoint_y) &lt; 30)
+        {
+        march = false;
+        speed = 0;
+        exit;
+        }
     
-    step = mp_potential_step(waypoint_x,waypoint_y,march_level,false)
-    if(!step)
-    {
-        if(distance_to_point(waypoint_x,waypoint_y) &lt; 30)
-            march = false;
+    norm = 1;
+    ndir = direction;
+    var i = 0;
+    if(instance_nearest(waypoint_x,waypoint_y,par_commandable) != self)
+    { 
+        for(i = 0; i &lt; array_length_1d(global.commandables); i += 1)
+        {
+            if(global.commandables[i] != self)
+            {
+                var comx = (global.commandables[i]).x;
+                var comy = (global.commandables[i]).y;
+                var comd = (global.commandables[i]).direction;
+                distTo = point_distance(comx,comy,waypoint_x,waypoint_y);
+                distFrom = point_distance(comx,comy,x,y);
+                if(distFrom &lt; 15)
+                {
+                    norm += 1;
+                    ndir += comd;
+                    speed -= 1;
+                    if(distFrom &lt; 10)
+                    {
+                        if(distTo &lt; point_distance(x,y,waypoint_x,waypoint_y))
+                            speed = 0;
+                    }
+                } 
+            }
+        }
+        direction = ndir/norm; 
     }
 }
-else 
-{
+
     
 </string>
           </argument>
@@ -128,12 +158,10 @@ else
             <kind>1</kind>
             <string>//xoffset = ( (-(125)/2) + (unit * 25));
 //yoffset = -10;
-march = true
-xoffset = -25 + random(50)
-yoffset = -25 + random(50)
+march = true;
 march_level = (global.controller).march_levels[ind];
-waypoint_x = (global.controller).waypoints_x[ind] + xoffset;
-waypoint_y = (global.controller).waypoints_y[ind] + yoffset;
+waypoint_x = (global.controller).waypoints_x[ind];
+waypoint_y = (global.controller).waypoints_y[ind];
 
 
 </string>

@@ -51,6 +51,11 @@ waypoints_y[i]=0;
 march_levels[i] = 0;
 }
 global.controller = id;
+global.commandables[0]=0;
+for (i = 0; i &lt; instance_number(par_commandable); i += 1)
+    {
+    commandables[i] = instance_find(par_commandable,i);
+    }
 </string>
           </argument>
         </arguments>
